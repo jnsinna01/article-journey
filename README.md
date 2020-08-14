@@ -1,3 +1,3 @@
 # artical-journey
 My first Git Repo
-This is a CRUD apploication and my first project in Git
+This is a CRUD application and my first project in Git
