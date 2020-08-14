@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="jumbotron">
+    <h2>Hello {{ user.username }}</h2></br>
+    <h1 class="display-4">Welcome to Article's Page</h1>
+    <p class="lead">My first website in Git</p>
+    <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">View Articles</a>
+    </p>
+    <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'logout' %}" role="button">Log Out</a>
+    </p>
+    </div>
+{% else %}
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Article's Page</h1>
+        <h3 class="lead">My first website in Git</h3></br>
+        <h4>Login or Signup to access the articles</h4></br>
+        <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+        </p>
+        <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Signup</a>
+        </p>
+    </div>
+{% endif %}
+{% endblock %}

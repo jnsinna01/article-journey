@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="card">
+  <br class="card-header">
+  <h2>{{ article.title }}</h2>
+  <h5>By {{ article.author }} | {{ article.date }}</h5>
+  <h5><img src="{{ article.image.url }}" width="1000" height="600">
+</div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{ article.body|safe }}</p>
+    </blockquote>
+  </div>
+  <div class="card-footer">
+    {% for comment in article.comments.all %}
+        <h5>{{ comment.author }} commented &middot; {{ comment.comment }}</h5>
+    {% endfor %}
+    <h5><a href="{% url 'article_list' %}">Back to Articles</a></h5>
+
+   <form action="{% url 'article_like' article.pk %}" method="post">
+   {% csrf_token %}
+   <button type="submit", name="article_pk", value="{{ article.pk }}", class="btn btn-primary btn-sm">{{ article.likes.count }} Likes</button>
+   </form>
+  </div>
+</div>
+
+
+{% endblock %}
