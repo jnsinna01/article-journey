@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
-from .models import Article
+from .models import Article, Comment
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
@@ -18,6 +18,16 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
     template_name = 'create_article.html'
     fields = ('title', 'image', 'body',)
     login_url = 'login'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class CommentCreateView(CreateView):
+    model = Comment
+    template_name = 'create_comment.html'
+    fields = ('article', 'comment',)
 
     def form_valid(self, form):
         form.instance.author = self.request.user
