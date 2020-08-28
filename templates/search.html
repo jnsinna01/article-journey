@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for article in object_list %}
+<div class="card">
+    <h3 class="card-header"><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h3>
+    <h5 class="card-header">By {{ article.author }} | {{ article.date }}</h5>
+</div>
+{% endfor %}
+{% endblock %}

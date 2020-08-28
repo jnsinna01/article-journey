@@ -7,11 +7,14 @@
     <h2>Hello {{ user.username }}</h2></br>
     <h1 class="display-4">Welcome to Article's Page</h1>
     <p class="lead">My first website in Git</p>
+    <form class="form-inline mt-2 mt-md-0" action="{% url 'search_results' %}" method="get">
+        <input name="q" class="form-control mr-sm-2" type="text"  placeholder="Search Articles" aria-label="Search">
+    </form></br>
     <p class="lead">
-    <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">View Articles</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'article_list' %}" role="button">View Articles</a>
     </p>
     <p class="lead">
-    <a class="btn btn-primary btn-lg" href="{% url 'logout' %}" role="button">Log Out</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'logout' %}" role="button">Log Out</a>
     </p>
     </div>
 {% else %}

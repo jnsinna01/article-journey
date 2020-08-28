@@ -7,6 +7,16 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 
 
+class SearchResultsList(LoginRequiredMixin, ListView):
+    model = Article
+    template_name = 'search.html'
+    login_url = 'login'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return Article.objects.filter(title__icontains=query)
+
+
 def likeview(request, pk):
     article = get_object_or_404(Article, id=request.POST.get('article_pk'))
     article.likes.add(request.user)
