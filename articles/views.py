@@ -4,7 +4,7 @@ from .models import Article, Comment
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 
 
 class SearchResultsList(LoginRequiredMixin, ListView):
@@ -14,7 +14,11 @@ class SearchResultsList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        return Article.objects.filter(title__icontains=query)
+        queryset = Article.objects.filter(title__icontains=query)
+        if queryset:
+            return queryset
+        else:
+            raise Http404
 
 
 def likeview(request, pk):
