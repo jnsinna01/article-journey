@@ -1,3 +1,3 @@
 # article-journey
-My first Git Repo
+I have written REST API for my project
 This is a CRUD application and my first project in Git
